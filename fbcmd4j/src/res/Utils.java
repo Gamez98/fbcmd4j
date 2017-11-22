@@ -37,7 +37,7 @@ public class Utils
 	 * Logging class Messages / Info
 	 */
 	private static final Logger logger = LogManager.getLogger(Utils.class);
-	
+	private static String post_to_text = "";
 	/**
 	 * 
 	 * @param folder_name -> When we instantiate this class we'll be able to redirect the parameters
@@ -131,4 +131,43 @@ public class Utils
 			logger.error("Error at: " + e);
 		}
 	}
+	
+	public static String saving_My_Post(String file_name, List<Post> posts) {
+		
+		File system_file = new File(file_name + ".txt");
+		
+		try 
+		{
+			
+			if(!system_file.exists() || system_file.getName() != "")
+			{
+				system_file.createNewFile();
+			}
+			
+			FileOutputStream fops = new FileOutputStream(system_file);
+			
+			for(Post post : posts)
+			{
+				
+				if(post.getStory() != null || !post.getStory().equals(""))
+				{
+					post_to_text += "Story - " + post.getStory() + " - \n";
+				}
+				if(post.getMessage() != null || !post.getMessage().equals(""))
+				{
+					post_to_text += "Message - " + post.getStory() + " - \n "
+							+ ". . . . . . . . . . . . . . . . . . . .\n";
+				}
+				
+			}
+			
+		}
+		catch (IOException e)
+		{
+			logger.error(e);
+		}
+		
+		return system_file.getName();
+	}
+	
 }

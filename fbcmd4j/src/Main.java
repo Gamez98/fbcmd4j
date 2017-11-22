@@ -100,14 +100,16 @@ public class Main
 						   Utils.Print_Post_in_Wall(posts);
 					   }
 					   
+					   break;
 				   }
 				   case 3:
-				   {
+		 		   {
 					   
 					   System.out.println("Write a status... : ");
 					   status = scanner.nextLine();
 					   Utils.posting_Status(status, facebook);
-	
+					   
+					   break;
 				   }
 				   case 4:
 				   {
@@ -115,13 +117,14 @@ public class Main
 					   System.out.println("Post a Link: ");
 					   link = scanner.nextLine();
 					   Utils.posting_Status(link, facebook);
-				   
+					   
+					   break;   
 				   }
 				   case 5:
 				   {
 					
 					   System.exit(0);
-				   
+					   break;
 				   }
 				   default:
 				   {
