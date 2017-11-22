@@ -104,7 +104,31 @@ public class Utils
 		System.out.println(". . . . . . . . . . . . . . . . . . . .");	
 	}
 	
+	public static void posting_Status(String message, Facebook facebook)
+	{
+		try
+		{
+			facebook.postStatusMessage(message);
+		}
+		catch (FacebookException e)
+		{
+			logger.error("Error at: " + e);
+		}
+	}
 	
-	
-	
+	public static void posting_Link(String link, Facebook facebook)
+	{
+		try
+		{
+			facebook.postLink( new URL(link) );
+		}
+		catch (MalformedURLException e)
+		{
+			logger.error("Error at: " + e);
+		}
+		catch (FacebookException e)
+		{
+			logger.error("Error at: " + e);
+		}
+	}
 }

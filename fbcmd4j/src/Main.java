@@ -32,12 +32,15 @@ public class Main
 	private static final String CONFIG_DIR = "config";
 	private static final String CONFIG_FILE = "fbcmd4j.properties";
 	public static int item_selected  = 0; 
+	public static String status = "";
+	public static String link = "";
 	
 	public static void main(String[] args) 
 	{
 		// TODO Auto-generated method stub
 		Facebook facebook = null;
 		Properties facebook_properties = null;
+		
 		/**
 		 * 
 		 */
@@ -68,23 +71,63 @@ public class Main
 			
 			try 
 			{
+				
 				item_selected = scanner.nextInt();
 				scanner.nextLine();
+				
 				switch (item_selected) 
 				{
+				
 				   case 1:
 				   {
-					   System.out.println("-- Showing Wall NewsFeed --");
-					   ResponseList<Post> newsFeed = facebook.getFeed();
-					   for(Post posts :  newsFeed) 
+					   
+					   System.out.println("-- Showing NewsFeed --");
+					   ResponseList<Post> newsfeed = facebook.getFeed();
+					   for(Post posts :  newsfeed) 
 					   {
 						   Utils.Print_Post_in_Wall(posts);
 					   }
+					   
 					   break;
+				   }
+				   case 2:
+				   {
+					   
+					   System.out.println("-- Showing Wall --");
+					   ResponseList<Post> user_wall = facebook.getPosts();
+					   for(Post posts : user_wall)
+					   {
+						   Utils.Print_Post_in_Wall(posts);
+					   }
+					   
+				   }
+				   case 3:
+				   {
+					   
+					   System.out.println("Write a status... : ");
+					   status = scanner.nextLine();
+					   Utils.posting_Status(status, facebook);
+	
+				   }
+				   case 4:
+				   {
+					
+					   System.out.println("Post a Link: ");
+					   link = scanner.nextLine();
+					   Utils.posting_Status(link, facebook);
+				   
+				   }
+				   case 5:
+				   {
+					
+					   System.exit(0);
+				   
 				   }
 				   default:
 				   {
+				
 					   logger.info("Incorrect Option");   
+				   
 				   }
 			    }
 			} 
