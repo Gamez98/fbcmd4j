@@ -89,5 +89,22 @@ public class Utils
 		return facebook;
 	}
 	
+	public static void Print_Post_in_Wall(Post post) 
+	{
+	
+		if(post.getStory() != null) 
+		{
+			System.out.println("Story: " + post.getStory() + "...");
+		}
+		if(post.getMessage() != null)
+		{
+			System.out.println("Message" + post.getMessage() + "...");
+		}
+		
+		System.out.println(". . . . . . . . . . . . . . . . . . . .");	
+	}
+	
+	
+	
 	
 }
