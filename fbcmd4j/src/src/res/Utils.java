@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package src.res;
 
 import java.io.IOException;
@@ -37,6 +35,7 @@ public class Utils
 	 * Logging class Messages / Info
 	 */
 	private static final Logger logger = LogManager.getLogger(Utils.class);
+	private static String save_post_message;
 	
 	/**
 	 * 
@@ -53,9 +52,8 @@ public class Utils
 	Path configuration_file = Paths.get(folder_name, file_name);
 	facebook_properties.load(Files.newInputStream(configuration_file));
 	BiConsumer<Object, Object> emptyProperty = (k, v) -> {
-		if(((String)v).isEmpty() || ((String)k).isEmpty()) {
+		if(((String)v).isEmpty()) 
 		logger.error("The property '" + k + "' or '" + v + "' is empty!");
-		}
 	};
 		facebook_properties.forEach(emptyProperty);
 		return facebook_properties;
@@ -84,7 +82,7 @@ public class Utils
 		facebook.setOAuthAccessToken(new AccessToken(facebook_properties.getProperty("oauth.accessToken"), null));
 	
 		/**
-		 * If not in blank, return Facebook Acces Tokens
+		 * If not in blank, return FaceBook Access Tokens
 		 */
 		return facebook;
 	}
@@ -131,4 +129,41 @@ public class Utils
 			logger.error("Error at: " + e);
 		}
 	}
+	
+	public static String Save_Post(String file_name, List<Post> posts)
+	{
+		File facebook_file = new File(file_name + ".txt");
+		
+		try 
+		{
+			if(!facebook_file.exists())
+			{
+				facebook_file.createNewFile();
+			}
+			
+			FileOutputStream fops = new FileOutputStream(facebook_file);
+			
+			for (Post post : posts)
+			{
+				if(post.getMessage() != null)
+					save_post_message += post.getStory() + "\n";
+				if(post.getMessage() != null)
+					save_post_message += post.getMessage() + "\n";
+				save_post_message += ". . . . . . . . . . . . . . . . . . . . \n";
+			fops.write(save_post_message.getBytes());
+			fops.close();
+			
+			logger.info("Save files at: " + facebook_file.getName() + "...");
+			logger.info("Save files at: " + facebook_file.getName() + "...");
+			}
+		}
+		catch (IOException e)
+		{
+			logger.error(e);
+		}
+		
+		return facebook_file.getName();
+		
+	}
+	
 }
